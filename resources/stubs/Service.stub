@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\{{modelName}};
+use App\Repository\{{modelName}}Repository;
+
+class {{modelName}}Service
+{
+    protected ${{modelNameFirstLower}}Repository;
+
+    public function __construct({{modelName}}Repository ${{modelNameFirstLower}}Repository)
+    {
+        $this->{{modelNameFirstLower}}Repository = ${{modelNameFirstLower}}Repository;
+    }
+
+    public function index()
+    {
+        return $this->{{modelNameFirstLower}}Repository->getAll();
+    }
+
+    public function findById($id)
+    {
+        return $this->{{modelNameFirstLower}}Repository->findById($id);
+    }
+
+    public function store($data)
+    {
+        return {{modelName}}::create($data);
+        return $this->{{modelNameFirstLower}}Repository->store($data);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->{{modelNameFirstLower}}Repository->update($id, $data);
+    }
+
+    public function delete($id)
+        {
+            $this->{{modelNameFirstLower}}Repository->delete($id);
+        }
+}

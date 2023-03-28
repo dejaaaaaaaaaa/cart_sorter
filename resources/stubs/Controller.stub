@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Session;
+use App\Http\Requests\{{modelName}}CreateRequest;
+use App\Http\Requests\{{modelName}}UpdateRequest;
+use App\Models\{{modelName}};
+use App\Services\{{modelName}}Service;
+use Illuminate\Http\Request;
+
+class {{modelName}}Controller extends Controller
+{
+    protected ${{modelNameFirstLower}}Service;
+
+    public function __construct(Request $request, {{modelName}}Service ${{modelNameFirstLower}}Service)
+    {
+        $this->{{modelNameFirstLower}}Service = ${{modelNameFirstLower}}Service;
+    }
+
+    public function index(Request $request)
+    {
+        ${{modelNameFirstLower}} = $this->{{modelNameFirstLower}}Service->index();
+        return response()->json(['data' => ${{modelNameFirstLower}}]);
+    }
+
+    public function store({{modelName}}CreateRequest $request)
+    {
+        $data = $request->validated();
+        ${{modelNameFirstLower}} = $this->{{modelNameFirstLower}}Service->store($data);
+        return response()->json([
+            '{{modelNameFirstLower}}' => ${{modelNameFirstLower}}
+        ]);
+    }
+
+    public function show($id)
+    {
+        return response()->json([
+        '{{modelNameFirstLower}}' => $this->{{modelNameFirstLower}}Service->findById($id)
+        ]);
+    }
+
+    public function update({{modelName}}UpdateRequest $request, $id)
+    {
+        $data = $request->validated();
+        $this->{{modelNameFirstLower}}Service->update($id, $data);
+
+        return response()->json();
+    }
+
+    public function destroy(${{modelNameSingularLowerCase}})
+    {
+        $this->{{modelNameFirstLower}}Service->delete(${{modelNameSingularLowerCase}});
+
+        return response()->json();
+    }
+}
